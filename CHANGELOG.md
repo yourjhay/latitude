@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0]
+
+### Added
+
+- Add `INSERT IGNORE` support for MySQL (#106 by @pavarnos)
+
+## [4.1.0]
+
+### Added
+
+- Add SQLite engine to support boolean values (#98 by @roomcays)
+
+## [4.0.0]
+
+### Changed
+
+- Require PHP >= 7.2 (#95)
+- Renamed `fn` to `func` for PHP 7.4 compatibility (#95)
+
+### Removed
+
+- Removed support for criteria strings (#95)
+
+## [3.3.1]
+
+### Fixed
+
+- Prevent escaping `*` when qualified (#93)
+
 ## [3.3.0]
 
 ### Changed

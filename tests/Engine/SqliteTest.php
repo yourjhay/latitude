@@ -7,18 +7,18 @@ use Latitude\QueryBuilder\TestCase;
 use function Latitude\QueryBuilder\field;
 use function Latitude\QueryBuilder\identify;
 
-class MySqlTest extends TestCase
+class SqliteTest extends TestCase
 {
     protected function setUp(): void
     {
-        $this->engine = new MySqlEngine();
+        $this->engine = new SqliteEngine();
     }
 
-    public function testIdentifier(): void
+    public function testIdentifier()
     {
         $field = identify('id');
 
-        $this->assertSql('`id`', $field);
+        $this->assertSql('id', $field);
     }
 
     public function testBooleanParameterValue()
@@ -26,25 +26,25 @@ class MySqlTest extends TestCase
         $criteria = field('active')->eq(true);
         $sql = $criteria->sql($this->engine);
         $params = $criteria->params($this->engine);
-        $this->assertSame('`active` = true', $sql);
+        $this->assertSame('active = 1', $sql);
         $this->assertEquals([], $params);
 
         $criteria = field('active')->eq(false);
         $sql = $criteria->sql($this->engine);
         $params = $criteria->params($this->engine);
-        $this->assertSame('`active` = false', $sql);
+        $this->assertSame('active = 0', $sql);
         $this->assertEquals([], $params);
 
         $criteria = field('active')->eq(null);
         $sql = $criteria->sql($this->engine);
         $params = $criteria->params($this->engine);
-        $this->assertSame('`active` = NULL', $sql);
+        $this->assertSame('active = NULL', $sql);
         $this->assertEquals([], $params);
 
         $criteria = field('active')->eq('yes');
         $sql = $criteria->sql($this->engine);
         $params = $criteria->params($this->engine);
-        $this->assertSame('`active` = ?', $sql);
+        $this->assertSame('active = ?', $sql);
         $this->assertEquals(['yes'], $params);
     }
 }
